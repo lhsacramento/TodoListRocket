@@ -1,0 +1,64 @@
+.task{
+    background-color: var(--gray-500);
+    border-radius: 8px;
+    display: flex;
+    gap: 0.875rem;
+    padding: 0 1rem;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.task + .task{
+    margin-top: 0.875rem;
+}
+
+.taskCheckBox{    
+    width: 1rem;
+    height: 1rem;
+    appearance: none;
+    width: 1.1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    border: 2px solid var(--blue);
+}
+
+.taskCheckBox:hover{
+    border-color: var(--blue-dark);
+}
+
+.taskCheckBox:checked:hover{
+    background-color: var(--purple);
+}
+
+.taskCheckBox:checked{
+    border: none;
+    background-color: var(--purple-dark);
+}
+
+.taskCheckBox:checked + .taskContent{
+    text-decoration: line-through;
+    color: var(--gray-300);
+}
+
+.taskContent{
+    width: 100%;
+    word-break: break-word;
+    color: var(--gray-100);
+    padding: 1rem;
+}
+
+.taskDeleteButton{
+    background: transparent;
+    border: none;
+    color: var(--gray-300);
+    display: flex;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+.taskDeleteButton:hover{
+    color: var(--danger);
+}
