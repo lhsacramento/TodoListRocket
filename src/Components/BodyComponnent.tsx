@@ -4,29 +4,11 @@ import AddTaskIcon from '../assets/addTaskIcon.png';
 import {Task} from './Task';
 import { useState, FormEvent, ChangeEvent } from 'react';
 
-const _myTasks = [{
-        content: 'Primeiro',
-        completed: true,
-    },
-    {
-        content: 'Segundo',
-        completed: false,
-    },
-    {
-        content: 'Terceiro',
-        completed: false,
-    },
-    {
-        content: 'Quarto',
-        completed: true,
-
-    },
-];
 
 
 export function BodyComponnent(){
 
-    const [myTasks,setMyTasks] = useState([..._myTasks]);
+    const [myTasks,setMyTasks] = useState(new Array());
     const [newTask, setNewTask] = useState('');
 
     
@@ -71,7 +53,7 @@ export function BodyComponnent(){
     return (
         <div className={BodyComponnentStyle.container}>
             <form onSubmit={handleCreateNewTask} className={BodyComponnentStyle.newTodoComponnent}>
-                <textarea value={newTask} onChange={handleChangeNewTask} maxLength={65} placeholder='Adicione uma nova tarefa'></textarea>
+                <textarea value={newTask} onChange={handleChangeNewTask} maxLength={65} placeholder='Adicione uma nova tarefa' required></textarea>
                 <button type='submit'>Criar <img src={AddTaskIcon}/></button>
             </form>
 
@@ -92,26 +74,25 @@ export function BodyComponnent(){
                     </div>
                 </div>
 
-                <div className={BodyComponnentStyle.tasks}>
-                    <div className={BodyComponnentStyle.withoutTask}>
+                <div className={myTasks.length > 0 ? BodyComponnentStyle.tasks : BodyComponnentStyle.tasksWithoutTask}>
+                    <div className={myTasks.length > 0 ? BodyComponnentStyle.withTask : BodyComponnentStyle.withoutTask}>
                         <img width='56px' src={ClipboardImg}/>    
                         <div>                
                             <strong>Você ainda não tem tarefas cadastradas</strong>
                             <span>Crie tarefas e organize seus itens a fazer</span> 
                         </div>
                     </div>
-
                     {
-                        myTasks.map((task) => {
-                            return (                            
-                               <Task 
-                                    key={task.content}
-                                    content={task.content} 
-                                    completed={task.completed} 
-                                    OnChangeCompleted={handleUpdateCompletedTasksCount}
-                                    OnDeleteTask={handleDeleteComment}
-                               />
-                            )
+                        myTasks.map((task) => {                            
+                                return (                            
+                                    <Task 
+                                         key={task.content}
+                                         content={task.content} 
+                                         completed={task.completed} 
+                                         OnChangeCompleted={handleUpdateCompletedTasksCount}
+                                         OnDeleteTask={handleDeleteComment}
+                                    />
+                                 )                            
                         })
                     }
                     
