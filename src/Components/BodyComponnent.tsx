@@ -4,7 +4,12 @@ import AddTaskIcon from '../assets/addTaskIcon.png';
 import {Task} from './Task';
 import { useState, FormEvent, ChangeEvent } from 'react';
 
-
+interface _Task{
+    content: string;
+    completed?: boolean;
+    OnDeleteTask: (content: string) => void;
+    OnChangeCompleted: (completed: boolean, content: string) => void;
+}
 
 export function BodyComponnent(){
 
@@ -40,13 +45,22 @@ export function BodyComponnent(){
         return count;
     }
 
+    function SortMyTasks(a:_Task,b:_Task){
+        if(a.completed == true)
+            return 1;
+        else if(b.completed == true)
+            return -1
+        else
+        return 0;
+    }
+
     function handleUpdateCompletedTasksCount(isCompleted:boolean, content: string){
         for(const _task of myTasks){
             if(_task.content === content){
                 _task.completed = isCompleted;
             }
         }
-
+        myTasks.sort(SortMyTasks);
         setMyTasks([...myTasks]);
     }
 
