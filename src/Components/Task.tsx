@@ -1,5 +1,5 @@
 import TaskStyle from './Task.module.css';
-import {useState, ChangeEvent} from 'react';
+import {useState} from 'react';
 import {Trash} from 'phosphor-react';
 
 interface Task{
